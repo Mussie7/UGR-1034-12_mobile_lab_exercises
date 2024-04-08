@@ -54,8 +54,36 @@ class _CourseAppState extends State<CourseApp> {
     Course(code: "SiTE-003", title: "Introduction to Mobile Programming", description: "Mobile Organization, Architecture, and Programming")
   ];
 
+  void _tabHandler(Course course) {
+    setState(() {
+      _selectedCourse = course;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp();
+    return MaterialApp(
+      home: Navigator(
+        pages: [
+          MaterialPage(
+              key: const ValueKey("CourseListScreen"),
+              child: CoursesListScreen(
+                courses: courses,
+                onTapped: _tabHandler,
+              )),
+          if (_selectedCourse != null) MaterialPage(key: ValueKey(_selectedCourse), child: CourseDetailScreen(course: _selectedCourse!))
+        ],
+
+        onPopPage: (route, result) {
+          if (!route.didPop(result)) {
+            return false;
+          }
+          setState(() {
+            _selectedCourse = null;
+          });
+          return true;
+        },
+      ),
+    );
   }
 }
