@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'navigation demo',
       home: ScreenOne(),
     );
@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ScreenOne extends StatelessWidget {
+  const ScreenOne({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,7 @@ class ScreenOne extends StatelessWidget {
           child: ElevatedButton(
               onPressed: () async {
                 final result = await Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) => ScreenThree(), settings: const RouteSettings(arguments: "data from one")));
+                    MaterialPageRoute(builder: (BuildContext context) => const ScreenThree(), settings: const RouteSettings(arguments: "data from one")));
               },
               child: const Text("Next"))),
     );
@@ -33,6 +35,8 @@ class ScreenOne extends StatelessWidget {
 }
 
 class ScreenTwo extends StatelessWidget {
+  const ScreenTwo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +47,8 @@ class ScreenTwo extends StatelessWidget {
 }
 
 class ScreenThree extends StatelessWidget {
+  const ScreenThree({super.key});
+
   @override
   Widget build(BuildContext context) {
     final text = ModalRoute.of(context)!.settings.arguments as String;
